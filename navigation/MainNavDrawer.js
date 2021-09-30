@@ -14,7 +14,7 @@ const Drawer = createDrawerNavigator()
 const Navigator = () => {
     return (
         <Drawer.Navigator >
-            <Drawer.Screen name="home" component={MainNavStack} options={{
+            <Drawer.Screen name="homeDr" component={MainNavStack} options={{
                 title: 'HOME',
                 headerTintColor: 'white',
                 headerStyle: {
@@ -23,7 +23,7 @@ const Navigator = () => {
                 headerShown: false,
                 headerRight: () => <Image source={require("../assets/logo.png")} />
             }}/>
-            <Drawer.Screen name="cities" component={Cities} options={{
+            <Drawer.Screen name="citiesDr" component={Cities} options={{
                 title: 'CITIES',
                 headerTintColor: 'white',
                 headerStyle: {
@@ -31,27 +31,27 @@ const Navigator = () => {
                 },
                 headerRight: () => <Image source={require("../assets/logo.png")} />
             }}/>
-            <Drawer.Screen name="signup" component={SignUp} options={{
+            <Drawer.Screen name="signupDr" component={SignUp} options={{
                 title: 'SIGN UP',
                 headerTintColor: 'white',
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
             }}/>
-            <Drawer.Screen name="login" component={LogIn} options={{
+            <Drawer.Screen name="loginDr" component={LogIn} options={{
                 title: 'LOG IN',
                 headerTintColor: 'white',
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
             }}/>
-            <Drawer.Screen name="city" component={City} options={{
+{/*             <Drawer.Screen name="city" component={City} options={{
                 title: 'CITY',
                 headerTintColor: 'white',
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-            }}/>
+            }}/> */}
         </Drawer.Navigator>
 
     )

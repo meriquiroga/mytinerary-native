@@ -12,10 +12,12 @@ const myStore = createStore(rootReducer, applyMiddleware(thunk))
 const App = () => {
   return (
     <Provider store={myStore}>
-      <NavigationContainer>
+
+    <NavigationContainer>
         <Navigator />
-      </NavigationContainer>
+    </NavigationContainer>
     </Provider>
+
   );
 }
 

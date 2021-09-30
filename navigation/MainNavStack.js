@@ -7,7 +7,6 @@ import LogIn from '../screens/LogIn'
 import City from '../screens/City'
 import { StyleSheet, Image, SafeAreaView, } from "react-native";
 
-
 const Stack = createNativeStackNavigator()
 
 const Navigator = () => {
@@ -33,7 +32,6 @@ const Navigator = () => {
             <Stack.Screen name="login" component={LogIn}/>
             <Stack.Screen name="city" component={City}/>
         </Stack.Navigator>
-
     )
 }
 

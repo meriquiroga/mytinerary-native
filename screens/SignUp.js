@@ -90,8 +90,6 @@ const SignUp = () => {
           </TouchableOpacity>
           <Text style={styles.buttonText}>Already user? Log in here</Text>
       </View>
-      
-
     </View>
   );
 }
