@@ -12,7 +12,7 @@ const citiesActions = {
     },
 
     filterCities: (e) => {
-        const value = e.target.value
+        const value = e
         return async (dispatch, getState) => {
             dispatch({type: 'FILTER_CITIES', payload: value})
         }

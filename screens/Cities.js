@@ -37,8 +37,13 @@ const Cities = (props) => {
   }
  */
    var filteredMap = props.filtered.map((city) => {
-    return (     
-      <Text key={city.name}>{city.name}</Text>
+    return ( 
+      <View>
+              <Text key={city.name}>{city.name}</Text>
+
+
+
+      </View>    
       
     );
   })
@@ -50,7 +55,7 @@ const Cities = (props) => {
       <Text style={styles.citiesText}>Find your next adventure</Text>
       </View>
       <View>
-        <TextInput style={styles.formInput} placeholder="Search by destination" onChange={(e) => props.filterCities(e)}/>
+        <TextInput style={styles.formInput} placeholder="Search by destination" onChangeText={(e) => props.filterCities(e)}/>
       </View>
       <View>
       {props.filtered.length > 0 ? filteredMap :  
