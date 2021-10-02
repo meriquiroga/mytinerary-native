@@ -5,13 +5,31 @@ import Cities from '../screens/Cities'
 import SignUp from '../screens/SignUp'
 import LogIn from '../screens/LogIn'
 import City from '../screens/City'
+import Logout from '../components/Logout'
 import { StyleSheet, Image, SafeAreaView, } from "react-native";
 import MainNavStack from './MainNavStack'
+import { useEffect } from "react";
+import {connect} from 'react-redux'
+import usersActions from '../redux/actions/usersActions'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const Drawer = createDrawerNavigator()
 
-const Navigator = () => {
+const Navigator = (props) => {
+
+    useEffect(()=>{
+        
+        const storage= async()=>{
+          let token = await AsyncStorage.getItem("token")
+          if(token){
+            props.logInLS(token)
+          }
+        }
+        storage()
+    
+      }, [])
+
     return (
         <Drawer.Navigator >
             <Drawer.Screen name="homeDr" component={MainNavStack} options={{
@@ -31,20 +49,20 @@ const Navigator = () => {
                 },
                 headerRight: () => <Image source={require("../assets/logo.png")} />
             }}/>
-            <Drawer.Screen name="signupDr" component={SignUp} options={{
+            {!props.token && <Drawer.Screen name="signupDr" component={SignUp} options={{
                 title: 'SIGN UP',
                 headerTintColor: 'white',
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-            }}/>
-            <Drawer.Screen name="loginDr" component={LogIn} options={{
+            }}/>}
+             {!props.token && <Drawer.Screen name="loginDr" component={LogIn} options={{
                 title: 'LOG IN',
                 headerTintColor: 'white',
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-            }}/>
+            }}/>}
 {/*             <Drawer.Screen name="city" component={City} options={{
                 title: 'CITY',
                 headerTintColor: 'white',
@@ -52,9 +70,22 @@ const Navigator = () => {
                 backgroundColor: '#0b3f78'
                 },
             }}/> */}
+            {props.token && <Drawer.Screen name="logout" component={Logout}/>}
         </Drawer.Navigator>
-
     )
 }
 
-export default Navigator
+const mapStateToProps = (state) => {
+    return {
+        token: state.usersReducer.token, 
+        name: state.usersReducer.name,
+        img: state.usersReducer.img
+    }
+}
+
+const mapDispatchToProps = {
+    logOut: usersActions.logOut,
+    logInLS: usersActions.logInLS,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigator)

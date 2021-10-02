@@ -1,17 +1,20 @@
 import React from 'react'
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from '@react-navigation/drawer'
 import Home from '../screens/Home'
 import Cities from '../screens/Cities'
 import SignUp from '../screens/SignUp'
 import LogIn from '../screens/LogIn'
 import City from '../screens/City'
+import Logout from '../components/Logout'
 import { StyleSheet, Image, SafeAreaView, } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import MainNavStack from './MainNavStack'
 import { useEffect } from "react";
 import {connect} from 'react-redux'
 import usersActions from '../redux/actions/usersActions'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Stack = createNativeStackNavigator()
+
+const Drawer = createDrawerNavigator()
 
 const Navigator = (props) => {
 
@@ -26,16 +29,17 @@ const Navigator = (props) => {
       }, [])
 
     return (
-        <Stack.Navigator >
-            <Stack.Screen name="home" component={Home} options={{
+        <Drawer.Navigator >
+            <Drawer.Screen name="homeDr" component={MainNavStack} options={{
                 title: 'HOME',
                 headerTintColor: 'white',
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
+                headerShown: false,
                 headerRight: () => <Image source={require("../assets/logo.png")} />
             }}/>
-            <Stack.Screen name="cities" component={Cities} options={{
+            <Drawer.Screen name="citiesDr" component={Cities} options={{
                 title: 'CITIES',
                 headerTintColor: 'white',
                 headerStyle: {
@@ -43,18 +47,29 @@ const Navigator = (props) => {
                 },
                 headerRight: () => <Image source={require("../assets/logo.png")} />
             }}/>
-            <Stack.Screen name="signup" component={SignUp}/>
-             <Stack.Screen name="login" component={LogIn}/>
-            <Stack.Screen name="city" component={City} options={{
+            {!props.token && <Drawer.Screen name="signupDr" component={SignUp} options={{
+                title: 'SIGN UP',
+                headerTintColor: 'white',
+                headerStyle: {
+                backgroundColor: '#0b3f78'
+                },
+            }}/>}
+             {!props.token && <Drawer.Screen name="loginDr" component={LogIn} options={{
+                title: 'LOG IN',
+                headerTintColor: 'white',
+                headerStyle: {
+                backgroundColor: '#0b3f78'
+                },
+            }}/>}
+{/*             <Drawer.Screen name="city" component={City} options={{
                 title: 'CITY',
                 headerTintColor: 'white',
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => <Image source={require("../assets/logo.png")} />
-            }} />
-            
-        </Stack.Navigator>
+            }}/> */}
+            {props.token && <Drawer.Screen name="logout" component={Logout}/>}
+        </Drawer.Navigator>
     )
 }
 

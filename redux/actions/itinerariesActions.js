@@ -4,7 +4,7 @@ const itinerariesActions = {
   getItineraries: (id) => {
     return async (dispatch, getState) => {
       let response = await axios.get(
-        "http://localhost:4000/api/itineraries/" + id
+        "https://mytinerarywebapp.herokuapp.com/api/itineraries/" + id
       );
       if (!response.data.success) {
         throw new Error("There´s been a conection error");
@@ -18,7 +18,7 @@ const itinerariesActions = {
       //Le pido al backend que me valide el token
       try {
         let response = await axios.put(
-          `http://localhost:4000/api/likes/${itineraryId}`,
+          `https://mytinerarywebapp.herokuapp.com/api/likes/${itineraryId}`,
           {},
           {
             headers: {
@@ -42,7 +42,7 @@ const itinerariesActions = {
       //Le pido al backend que me valide el token
       try {
         let response = await axios.put(
-          `http://localhost:4000/api/itinerary/pushcomment/${id}`,
+          `https://mytinerarywebapp.herokuapp.com/api/itinerary/pushcomment/${id}`,
           newComment,
           {
             headers: {

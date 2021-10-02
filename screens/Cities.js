@@ -37,7 +37,11 @@ const Cities = (props) => {
  */
    var filteredMap = props.filtered.map((city) => {
     return ( 
-      <TouchableOpacity key={city.name}>
+      <TouchableOpacity onPress={() => {
+        props.navigation.navigate('city', {
+            id: city._id
+        })
+    }} key={city.name}>
             <ImageBackground source={{uri: city.src}} style={styles.citiesImg}>
               <Text style={styles.citiesH}>{city.name}</Text>
               <Text style={styles.citiesP}>{city.country}</Text>
@@ -118,6 +122,9 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     padding: 5
+  },
+  citiesCard: {
+    alignItems: 'center'
   }
 });
 

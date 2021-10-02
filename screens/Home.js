@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, SafeAreaView, } from "react-native";
+import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, SafeAreaView } from "react-native";
 import MyCarousel from "../components/MyCarousel";
 
 const Home = (props) => {
@@ -31,6 +31,7 @@ const Home = (props) => {
         <View style={styles.carrousel}>
           <Text style={styles.carrouselText}>Popular MyTineraries</Text>
         </View>
+        <MyCarousel />
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "space-between",
   },
-  header: {
+  /* header: {
     width: "100%",
     height: 80,
     paddingVertical: 10,
@@ -59,12 +60,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 30,
-  },
-  headerText: {
+  }, */
+  /* headerText: {
     color: "#fff",
     textAlign: "center",
     paddingVertical: 5,
-  },
+  }, */
   main: {
     flexGrow: 1,
   },

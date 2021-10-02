@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { toast } from 'react-toastify';
+import { Alert } from 'react-native'
 
 const usersActions = {
     logIn: (userInfo) => {
         return async (dispatch, getState) => {
-            let response = await axios.post('http://localhost:4000/api/user/login', {...userInfo})
+            let response = await axios.post('https://mytinerarywebapp.herokuapp.com/api/user/login', {...userInfo})
             if (!response.data.success) {
                 throw response
             }
@@ -15,7 +15,7 @@ const usersActions = {
 
     signUp: (userInfo) => {
         return async (dispatch, getState) => {
-            let response = await axios.post('http://localhost:4000/api/user/signup', {...userInfo})
+            let response = await axios.post('https://mytinerarywebapp.herokuapp.com/api/user/signup', {...userInfo})
             if (!response.data.success) {
                 throw response
             }
@@ -27,7 +27,8 @@ const usersActions = {
     logOut: () => {
         return (dispatch, getState) => {
             dispatch({type: 'LOG_OUT'})
-            toast('Goodbye! Hope to see you back soon!', {
+            Alert.alert('Goodbye! Hope to see you back soon!')
+/*             toast('Goodbye! Hope to see you back soon!', {
                 position: "top-center",
                 autoClose: 4000,
                 hideProgressBar: true,
@@ -36,14 +37,14 @@ const usersActions = {
                 draggable: true,
                 progress: undefined,
                 });
-        }
+ */        }
     },
 
     logInLS: (token) => {
         return async (dispatch, getState) => {
             //Le pido al backend que me valide el token
             try {
-                let response = await axios.get('http://localhost:4000/api/verifyToken', {
+                let response = await axios.get('https://mytinerarywebapp.herokuapp.com/api/verifyToken', {
                 headers: {
                     Authorization: 'Bearer ' + token,
                 },

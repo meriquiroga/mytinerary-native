@@ -1,11 +1,33 @@
+/* import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+const City = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Working on it!</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+export default City */
+
 import { useState } from "react";
 import { useEffect } from "react";
 import {connect} from 'react-redux'
-import citiesActions from '../redux/actions/citiesActions'
-import React from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import Itinerary from '../components/Itinerary'
+import Itinerary from "../components/Itinerary";
 import itinerariesActions from '../redux/actions/itinerariesActions'
+import citiesActions from "../redux/actions/citiesActions";
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 const City = (props) => {
   const [loading, setLoading] = useState(true);
@@ -24,21 +46,22 @@ const City = (props) => {
       }
     }
     /* window.scrollTo(0, 0); */
-    getOneCity(props.route.params.id)
+    getOneCity(props.match.params.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])  
+  }, [])
 
+  
   useEffect(() => {
     async function getItineraries() {
       try {
-        await props.getItineraries(props.route.params.id)
+        await props.getItineraries(props.match.params.id)
       } catch (error) {
         alert(error)
       } /* finally {
         setLoading(false)
       } */
     }
-    getItineraries(props.route.params.id)
+    getItineraries(props.match.params.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -55,35 +78,15 @@ const City = (props) => {
   } */
    
 
-  var itinerariesMap = props.itineraries.map((itinerary) => {
+  /* var itinerariesMap = props.itineraries.map((itinerary) => {
     return (              
         <Itinerary itinerary={itinerary} key={itinerary._id } />       
     );
-  })
+  }) */
 
   return (
     <>
-        <ScrollView>
-    <View style={styles.container}>
-    <Text style={styles.citiesH}>{props.city.name}</Text>
-      <Text style={styles.citiesP}>{props.city.country}</Text>
-  </View>
-  <View style={styles.itineraryContainer}>
-          <Text style={styles.find}>Find the perfect itinerary for your trip</Text>
-        </View>
-
-        <View style={styles.cityCard}>
-        {props.itineraries.length > 0 ? itinerariesMap :  
-          <View >
-            <Text>We're sorry!</Text>
-            <Text>We don't have any itineraries yet...</Text>
-            <Text>Please try again soon</Text>
-          </View>
-        }
-        </View>
-
-
-  </ScrollView>
+    <Text>{props.city.name}</Text>
       {/* <div className="contenedor">
         <div className='city' style={{backgroundImage: `url(${props.city.src})`}}>
                 <div className='insideCities'>   
@@ -115,69 +118,6 @@ const City = (props) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    justifyContent: 'center',
-    alignItems: "center",
-  },
-  citiesTitle: {
-    width: "100%",
-    height: 60,
-    backgroundColor: "#1aa5bc",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  citiesText: {
-    color: "white",
-    fontSize: 18,
-  },
-  formInput: {
-    backgroundColor: 'white',
-    borderRadius: 50,
-    padding: 10,
-    marginTop: 15,
-    marginHorizontal: 30,
-    textAlign: 'center',
-    width: 360
-  },
-  citiesImg: {
-    justifyContent: "center",
-    width: 380,
-    height: 280,
-    alignItems: "center",
-    justifyContent: 'flex-end',
-    margin: 10
-  },
-  citiesH: {
-    backgroundColor: "#1aa5bc",
-    color: 'white',
-    width: '100%',
-    textAlign: 'center',
-    padding: 15,
-    fontSize: 18
-  },
-  citiesP: {
-    backgroundColor: "#0b3f78",
-    color: 'white',
-    width: '100%',
-    textAlign: 'center',
-    padding: 5
-  }, 
-  itineraryContainer: {
-    alignItems: "center",
-  },
-  find: {
-    color: "#0b3f78",
-    fontSize: 16,
-    paddingVertical: 10,
-  },
-  cityCard: {
-    alignItems: 'center'
-  }
-});
 
 const mapStateToProps = (state) => {
   return {

@@ -1,50 +1,69 @@
 import React, { useState } from 'react';
-import {View, Image, ScrollView} from 'react-native'
+import {Text, View, ImageBackground, ScrollView, SafeAreaView, StyleSheet} from 'react-native'
+import Carousel from 'react-native-snap-carousel';
 
-const items = [
-    {src: '../assets/buenos_aires.jpg', altText: 'Argentina', caption: 'Buenos Aires'},
-    {src: '../assets/dubai.jpg', altText: 'United Arab Emirates', caption: 'Dubai'},
-    {src: '../assets/amsterdam.jpg', altText: 'Netherlands', caption: 'Amsterdam'},
-    {src: '../assets/estambul.jpg', altText: 'Turkey', caption: 'Istanbul'},
-    {src: '../assets/london.jpg', altText: 'United Kingdom', caption: 'London'},
-    {src: '../assets/new_york.jpg', altText: 'U.S.A.', caption: 'New York'},
-    {src: '../assets/rome.jpg', altText: 'Italy', caption: 'Rome'},
-    {src: '../assets/sidney.jpg', altText: 'Australia', caption: 'Sydney'},
-    {src: '../assets/tokio.jpg', altText: 'Japan', caption: 'Tokio'},
-    {src: '../assets/madrid.jpg', altText: 'Spain', caption: 'Madrid'},
-    {src: '../assets/new_delhi.jpg', altText: 'India', caption: 'New Delhi'},
-    {src: '../assets/paris.jpg', altText: 'France', caption: 'Paris'},
-];
+export default class MyCarousel extends React.Component {
+ 
+    constructor(props){
+        super(props);
+        this.state = {
+          activeIndex:0,
+          carouselItems: [
+            {src: 'https://cdn.pixabay.com/photo/2019/05/26/18/27/bridge-4230946_960_720.jpg', altText: 'Argentina', caption: 'Buenos Aires'},
+            {src: 'https://cdn.pixabay.com/photo/2016/11/14/03/29/grand-palace-1822487_960_720.jpg', altText: 'United Arab Emirates', caption: 'Dubai'},
+            ]
+      }
+    }
 
-const MyCarousel = () => {
+    _renderItem({item,index}){
+        return (
+          <ImageBackground source={{uri: item.src}} style={styles.citiesImg}>
+          <Text style={styles.citiesH}>{item.altText}</Text>
+          <Text style={styles.citiesP}>{item.caption}</Text>
+      </ImageBackground>
+    )
+    }
 
-  return (
-    <View>
-      <ScrollView horizontal>
-      <Image source={require("../assets/logo.png")} />
-      {/* { items.map((item, index) => {
-              <Image key={index} source={require(item.src)}/>
-
-
-      })} */}
-
-{/* {item.map((city) => (
-          <div key={city.caption} className="city_img" style = {{backgroundImage:`url('${city.src}')`}}>
-            <div>
-              <h4>{city.caption}</h4>
-              <p>{city.altText}</p>           
-            </div>
-          </div>
-        )
-        )} */}
-
-      </ScrollView>
-    </View>
-
-
-
-
-    );
+    render() {
+        return (
+          <SafeAreaView style={{flex: 1, backgroundColor:'white', paddingTop: 50, }}>
+            <View style={{ flex: 1, flexDirection:'row', justifyContent: 'center', }}>
+                <Carousel
+                  layout={"default"}
+                  ref={ref => this.carousel = ref}
+                  data={this.state.carouselItems}
+                  sliderWidth={400}
+                  itemWidth={400}
+                  renderItem={this._renderItem}
+                  onSnapToItem = { index => this.setState({activeIndex:index}) } />
+            </View>
+          </SafeAreaView>
+        );
+    }
 }
 
-export default MyCarousel;
+const styles = StyleSheet.create({
+  citiesImg: {
+    justifyContent: "center",
+    width: 380,
+    height: 280,
+    alignItems: "center",
+    justifyContent: 'flex-end',
+    margin: 10
+  },
+  citiesH: {
+    backgroundColor: "#1aa5bc",
+    color: 'white',
+    width: '100%',
+    textAlign: 'center',
+    padding: 8,
+    fontSize: 18
+  },
+  citiesP: {
+    backgroundColor: "#0b3f78",
+    color: 'white',
+    width: '100%',
+    textAlign: 'center',
+    padding: 5
+  }
+});
