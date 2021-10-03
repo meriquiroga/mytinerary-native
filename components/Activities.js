@@ -1,49 +1,53 @@
-import { useState } from "react";
+import React from 'react'
 import activitiesActions from '../redux/actions/activitiesActions'
-import { useEffect } from "react";
 import {connect} from 'react-redux'
+import { StyleSheet, Text, View, ScrollView, ImageBackground, Image, TouchableOpacity, Alert, Number } from 'react-native'
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Activities = (props) => {
-  const [activities, setActivities] = useState([])
+  console.log(props.activities)
 
-  useEffect(() => {
-    async function getActivities() {
-      try {
-        const response = await props.getActivities(props.itinerary)
-        setActivities(response.data.response)
-      } catch (error) {
-        alert(error)
-      } /* finally {
-        setLoading(false)
-      } */
-    }
-    getActivities(props.itinerary)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  var activitiesMap = activities.map((activity) => {
-    return (              
-      <div key={activity._id} className="activityImg" style={{ backgroundImage: `url('${activity.img}')` }}>
-      <p>{activity.name}</p>
-      </div>
+  var activitiesMap = props.activities.map((activity, index) => {
+    return (   
+      <ImageBackground style={styles.activityImg} key={index} source={{uri: activity.img}}>
+        <Text style={styles.activityName}>{activity.name}</Text>
+      </ImageBackground>
     );
   })
 
   return (
     <>
-      <div className="activitiesContainer">
-      {activities.length > 0 ? activitiesMap :  
-          <div className="sorry">
-            <img src='/assets/sorry.png' alt=""/> 
-            <h2>We're sorry!</h2>
-            <h3>We don't have any activities yet...</h3>
-            <p>Please try again soon</p>
-          </div>
-        }
-      </div>
+      <ScrollView>
+      <View>{activitiesMap}</View>
+    </ScrollView>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: "center",
+    alignContent: 'center',
+    backgroundColor: 'pink',
+    marginHorizontal: 15,
+    marginBottom: 20
+  },
+  activityImg: {
+    width: 300,
+    height: 150,
+    marginVertical: 5
+  },
+  activityName: {
+    color: 'white',
+    backgroundColor: '#1aa5bc',
+    textAlign: 'center',
+    paddingVertical: 3
+  }
+
+});
 
 const mapDispatchToProps = {
   getActivities: activitiesActions.getActivities,

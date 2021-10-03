@@ -54,6 +54,8 @@ const Navigator = (props) => {
                 headerRight: () => <Image source={require("../assets/logo.png")} />
             }} />
             
+
+            
         </Stack.Navigator>
     )
 }

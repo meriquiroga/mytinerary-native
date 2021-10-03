@@ -9,8 +9,22 @@ export default class MyCarousel extends React.Component {
         this.state = {
           activeIndex:0,
           carouselItems: [
-            {src: 'https://cdn.pixabay.com/photo/2019/05/26/18/27/bridge-4230946_960_720.jpg', altText: 'Argentina', caption: 'Buenos Aires'},
-            {src: 'https://cdn.pixabay.com/photo/2016/11/14/03/29/grand-palace-1822487_960_720.jpg', altText: 'United Arab Emirates', caption: 'Dubai'},
+            {"name":"Amsterdam","country":"Netherlands","src":"https://cdn.pixabay.com/photo/2019/05/26/18/27/bridge-4230946_960_720.jpg"},
+            {"name":"Bangkok","country":"Thailand","src":"https://cdn.pixabay.com/photo/2016/11/14/03/29/grand-palace-1822487_960_720.jpg"},
+            {"name":"Buenos Aires","country":"Argentina","src":"https://beprint.com.ar/wp-content/uploads/2021/08/buenos_aires.jpg"},
+            {"name":"Cancun","country":"Mexico","src":"https://beprint.com.ar/wp-content/uploads/2021/08/cancun.jpg"},
+            {"name":"Dubai","country":"United Arab Emirates","src":"https://beprint.com.ar/wp-content/uploads/2021/08/dubai.jpg"},
+            {"name":"Istanbul","country":"Turkey","src":"https://beprint.com.ar/wp-content/uploads/2021/08/estambul.jpg",},
+            {"name":"London","country":"United Kingdom","src":"https://beprint.com.ar/wp-content/uploads/2021/08/london.jpg",},
+            {"name":"Madrid","country":"Spain","src":"https://beprint.com.ar/wp-content/uploads/2021/08/madrid.jpg"},
+            {"name":"New Delhi","country":"India","src":"https://beprint.com.ar/wp-content/uploads/2021/08/new_delhi.jpg"},
+            {"name":"New York","country":"U.S.A.","src":"https://beprint.com.ar/wp-content/uploads/2021/08/new_york.jpg"},
+            {"name":"Paris","country":"France","src":"https://beprint.com.ar/wp-content/uploads/2021/08/paris.jpg"},
+            {"name":"Rio de Janeiro","country":"Brazil","src":"https://beprint.com.ar/wp-content/uploads/2021/08/rio.jpg"},
+            {"name":"Rome","country":"Italy","src":"https://beprint.com.ar/wp-content/uploads/2021/08/rome.jpg"},
+            {"name":"Tokio","country":"Japan","src":"https://beprint.com.ar/wp-content/uploads/2021/08/tokio.jpg"},
+            {"name":"Las Vegas","country":"U.S.A.","src":"https://beprint.com.ar/wp-content/uploads/2021/08/vegas.jpg"},
+            {"name":"Sydney","country":"Australia","src":"https://beprint.com.ar/wp-content/uploads/2021/08/sidney.jpg"}
             ]
       }
     }
@@ -18,38 +32,38 @@ export default class MyCarousel extends React.Component {
     _renderItem({item,index}){
         return (
           <ImageBackground source={{uri: item.src}} style={styles.citiesImg}>
-          <Text style={styles.citiesH}>{item.altText}</Text>
-          <Text style={styles.citiesP}>{item.caption}</Text>
+          <Text style={styles.citiesH}>{item.name}</Text>
+          <Text style={styles.citiesP}>{item.country}</Text>
       </ImageBackground>
     )
     }
 
     render() {
         return (
-          <SafeAreaView style={{flex: 1, backgroundColor:'white', paddingTop: 50, }}>
-            <View style={{ flex: 1, flexDirection:'row', justifyContent: 'center', }}>
+            <View style={{flexDirection:'row', }}>
                 <Carousel
                   layout={"default"}
                   ref={ref => this.carousel = ref}
                   data={this.state.carouselItems}
                   sliderWidth={400}
-                  itemWidth={400}
+                  itemWidth={300}
                   renderItem={this._renderItem}
                   onSnapToItem = { index => this.setState({activeIndex:index}) } />
             </View>
-          </SafeAreaView>
         );
     }
 }
 
 const styles = StyleSheet.create({
   citiesImg: {
-    justifyContent: "center",
-    width: 380,
+/*     justifyContent: "center",
+ */    width: 300,
     height: 280,
-    alignItems: "center",
+    /* alignItems: "center",
+    alignSelf: 'center', */
     justifyContent: 'flex-end',
-    margin: 10
+    marginVertical: 16,
+    marginLeft: 10
   },
   citiesH: {
     backgroundColor: "#1aa5bc",

@@ -2,13 +2,14 @@ import React from "react";
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, SafeAreaView } from "react-native";
 import MyCarousel from "../components/MyCarousel";
 
+
 const Home = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
         <ImageBackground
-          source={require("../assets/hero1.jpg")}
-          style={styles.mainImg}
+        source={{uri: 'https://beprint.com.ar/wp-content/uploads/2021/10/heronative.jpg'}}
+         style={styles.mainImg}
         >
           <Image source={require("../assets/mytineraryLogo.png")} />
           <Text style={styles.mainText}>
@@ -31,7 +32,7 @@ const Home = (props) => {
         <View style={styles.carrousel}>
           <Text style={styles.carrouselText}>Popular MyTineraries</Text>
         </View>
-        <MyCarousel />
+        <MyCarousel/>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>
@@ -50,25 +51,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "space-between",
   },
-  /* header: {
-    width: "100%",
-    height: 80,
-    paddingVertical: 10,
-    backgroundColor: "#0b3f78",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingTop: 30,
-  }, */
-  /* headerText: {
-    color: "#fff",
-    textAlign: "center",
-    paddingVertical: 5,
-  }, */
-  main: {
+  /* main: {
     flexGrow: 1,
-  },
+  }, */
   mainImg: {
     justifyContent: "center",
     width: "100%",
@@ -81,7 +66,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     width: "100%",
-    height: 40,
+    height: 60,
     backgroundColor: "#0b3f78",
     alignContent: 'center'
   },
@@ -106,7 +91,7 @@ const styles = StyleSheet.create({
   carrouselText: {
     color: "#0b3f78",
     fontSize: 16,
-    paddingVertical: 10,
+    paddingTop: 12,
   },
 });
 

@@ -4,6 +4,7 @@ import Home from '../screens/Home'
 import Cities from '../screens/Cities'
 import SignUp from '../screens/SignUp'
 import LogIn from '../screens/LogIn'
+import Activities from '../screens/Activities'
 import Logout from '../components/Logout'
 import { StyleSheet, Image, SafeAreaView, } from "react-native";
 import MainNavStack from './MainNavStack'
@@ -30,7 +31,7 @@ const Navigator = (props) => {
       }, [])
 
     return (
-        <Drawer.Navigator options={{style: {backgroundColor: '#0b3f78', flex: 1}}} >
+        <Drawer.Navigator >
             <Drawer.Screen name="homeDr" component={MainNavStack} options={{
                 title: 'HOME',
                 headerTintColor: 'white',
@@ -48,7 +49,14 @@ const Navigator = (props) => {
                 },
                 headerRight: () => <Image source={require("../assets/logo.png")} />
             }}/>
-            
+            <Drawer.Screen name="activities" component={Activities} options={{
+                title: 'ACTIVITIES',
+                headerTintColor: 'white',
+                headerStyle: {
+                backgroundColor: '#0b3f78'
+                },
+                headerRight: () => <Image source={require("../assets/logo.png")} />
+            }}/>
             {!props.token && <Drawer.Screen name="signupDr" component={SignUp} options={{
                 title: 'SIGN UP',
                 headerTintColor: 'white',

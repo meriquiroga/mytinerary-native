@@ -11,11 +11,8 @@ import { LogBox } from 'react-native'
 const myStore = createStore(rootReducer, applyMiddleware(thunk))
 
 const App = () => {
-    // Ignore log notification by message
-  LogBox.ignoreLogs(['Warning: ...']);
-
-  //Ignore all log notifications
-  LogBox.ignoreAllLogs();
+  /* LogBox.ignoreLogs(['Warning: ...']);
+  LogBox.ignoreAllLogs(); */
   return (
     <Provider store={myStore}>
       <NavigationContainer>
