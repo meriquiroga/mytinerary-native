@@ -25,12 +25,10 @@ const Itinerary = (props) => {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    console.log(visible);
     if (visible) {
       async function getActivities() {
         try {
           const response = await props.getActivities(props.itinerary._id);
-          console.log(response.data.response);
           setActivities(response.data.response);
         } catch (error) {
           Alert.alert(error);
@@ -57,7 +55,6 @@ const Itinerary = (props) => {
         let response = await props.likes(props.itinerary._id, props.token);
         if (response.success) {
           setCountLikes(response.response);
-          setQuore(!quore);
         } else {
           throw new Error("Something went wrong");
         }
@@ -73,10 +70,10 @@ const Itinerary = (props) => {
         <View style={styles.container}>
           <Text style={styles.title}>{props.itinerary.name}</Text>
           <View style={styles.likes}>
-          <Text>{countLikes.length}</Text>
-          <TouchableOpacity onPress={likes}>
-<Image source={require("../assets/likes.png")} />
-  </TouchableOpacity>
+            <Text>{countLikes.length}</Text>
+            <TouchableOpacity onPress={likes}>
+              <Image source={require("../assets/likes.png")} />
+            </TouchableOpacity>
           </View>
           <ImageBackground
             source={{ uri: props.itinerary.img }}
@@ -112,22 +109,25 @@ const Itinerary = (props) => {
           </View>
 
           {
-              <ScrollView>
-                {visible ? (
-                  <View >
-                    <Text style={styles.titleActivities}>Activities</Text>
-                    <View>
-                      <Activities activities={activities} />
-                    </View>
+            <ScrollView>
+              {visible ? (
+                <View>
+                  <Text style={styles.titleActivities}>Activities</Text>
+                  <View>
+                    <Activities activities={activities} />
                   </View>
-                ) : null}
-                <TouchableOpacity style={styles.viewButton}
-                  onPress={props.getActivities}
-                  onPress={toggle}
-                >
-                  <Text style={styles.textButton}>{!visible ? "VIEW MORE" : "VIEW LESS"}</Text>
-                </TouchableOpacity>
-              </ScrollView>
+                </View>
+              ) : null}
+              <TouchableOpacity
+                style={styles.viewButton}
+                onPress={props.getActivities}
+                onPress={toggle}
+              >
+                <Text style={styles.textButton}>
+                  {!visible ? "VIEW MORE" : "VIEW LESS"}
+                </Text>
+              </TouchableOpacity>
+            </ScrollView>
           }
         </View>
       </ScrollView>
@@ -187,25 +187,24 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   centerView: {
-    alignItems: 'center'
+    alignItems: "center",
   },
   viewButton: {
-    backgroundColor: '#1aa5bc',
+    backgroundColor: "#1aa5bc",
     padding: 5,
     paddingHorizontal: 15,
     borderRadius: 50,
-    alignSelf: 'center',
-    marginVertical: 15 
+    alignSelf: "center",
+    marginVertical: 15,
   },
   textButton: {
-    color: 'white'
-  }, 
+    color: "white",
+  },
   titleActivities: {
-    alignSelf: 'center',
+    alignSelf: "center",
     fontSize: 18,
-    color: '#0b3f78'
-  }
-
+    color: "#0b3f78",
+  },
 });
 
 const mapStateToProps = (state) => {

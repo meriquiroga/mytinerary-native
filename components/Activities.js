@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const Activities = (props) => {
-  console.log(props.activities)
 
   var activitiesMap = props.activities.map((activity, index) => {
     return (   
@@ -37,14 +36,14 @@ const styles = StyleSheet.create({
   },
   activityImg: {
     width: 300,
-    height: 150,
+    height: 200,
     marginVertical: 5
   },
   activityName: {
     color: 'white',
     backgroundColor: '#1aa5bc',
     textAlign: 'center',
-    paddingVertical: 3
+    paddingVertical: 6
   }
 
 });

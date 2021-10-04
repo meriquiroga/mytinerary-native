@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import {connect} from 'react-redux'
 import usersActions from '../redux/actions/usersActions'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {Ionicons} from '@expo/vector-icons'
 
 
 const Drawer = createDrawerNavigator()
@@ -38,7 +39,7 @@ const Navigator = (props) => {
                 backgroundColor: '#0b3f78'
                 },
                 headerShown: false,
-                headerRight: () => <Image source={require("../assets/logo.png")} />
+                headerRight: () => <Image source={require("../assets/logo.png")} />,
             }}/>
             <Drawer.Screen name="citiesDr" component={Cities} options={{
                 title: 'CITIES',
@@ -46,15 +47,16 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />
+                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />,
             }}/>
             
             {!props.token && <Drawer.Screen name="signupDr" component={SignUp} options={{
                 title: 'SIGN UP',
                 headerTintColor: 'white',
                 headerStyle: {
-                backgroundColor: '#0b3f78'
+                backgroundColor: '#0b3f78',
                 },
+                
             }}/>}
              {!props.token && <Drawer.Screen name="loginDr" component={LogIn} options={{
                 title: 'LOG IN',
@@ -62,6 +64,7 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
+                
             }}/>}
 {/*             <Drawer.Screen name="city" component={City} options={{
                 title: 'CITY',

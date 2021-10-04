@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useState } from "react";
 import {connect} from 'react-redux'
 import usersActions from '../redux/actions/usersActions'
@@ -24,7 +24,7 @@ const LogIn = (props) => {
       try {
         let response = await props.logIn(userInfo)
           if (response.data.success) {
-            console.log('User logueado')
+            Alert.alert('Welcome!')
             props.navigation.navigate('cities')
             /* toast('You are logged in!', {
               position: "top-center",

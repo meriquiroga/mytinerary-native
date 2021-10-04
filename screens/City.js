@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import {connect} from 'react-redux'
 import citiesActions from '../redux/actions/citiesActions'
 import React from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Image } from 'react-native'
 import Itinerary from '../components/Itinerary'
 import itinerariesActions from '../redux/actions/itinerariesActions'
 
@@ -74,7 +74,8 @@ const City = (props) => {
 
         <View style={styles.cityCard}>
         {props.itineraries.length > 0 ? itinerariesMap :  
-          <View >
+          <View style={styles.sorry}>
+            <Image source={require("../assets/sorry.png")} />
             <Text>We're sorry!</Text>
             <Text>We don't have any itineraries yet...</Text>
             <Text>Please try again soon</Text>
@@ -177,6 +178,10 @@ const styles = StyleSheet.create({
   },
   cityCard: {
     alignItems: 'center'
+  },
+  sorry: {
+    alignItems: 'center', 
+    padding: 10
   }
 });
 

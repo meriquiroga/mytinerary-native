@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import {connect} from 'react-redux'
 import usersActions from '../redux/actions/usersActions'
+import {Ionicons} from '@expo/vector-icons'
 
 const Stack = createNativeStackNavigator()
 
@@ -33,7 +34,10 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />
+                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />,
+                headerLeft: () => <Ionicons name="ios-menu" size={24} color="white" onPress={() => {
+                    props.navigation.toggleDrawer()
+                }} />
             }}/>
             <Stack.Screen name="cities" component={Cities} options={{
                 title: 'CITIES',
@@ -41,7 +45,10 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />
+                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />,
+                headerLeft: () => <Ionicons name="ios-menu" size={24} color="white" onPress={() => {
+                    props.navigation.toggleDrawer()
+                }} />
             }}/>
             <Stack.Screen name="signup" component={SignUp} options={{
                 title: 'SIGN UP',
@@ -49,7 +56,10 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => {props.token ? <Text>Welcome, {props.name}</Text> : <Image source={require("../assets/logo.png")} />}
+                headerRight: () => {props.token ? <Text>Welcome, {props.name}</Text> : <Image source={require("../assets/logo.png")} />},
+                headerLeft: () => <Ionicons name="ios-menu" size={24} color="white" onPress={() => {
+                    props.navigation.toggleDrawer()
+                }} />
             }}/>
              <Stack.Screen name="login" component={LogIn} options={{
                 title: 'LOG IN',
@@ -57,7 +67,10 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => <Image source={require("../assets/logo.png")} />
+                headerRight: () => <Image source={require("../assets/logo.png")} />,
+                headerLeft: () => <Ionicons name="ios-menu" size={24} color="white" onPress={() => {
+                    props.navigation.toggleDrawer()
+                }} />
             }}/>
             <Stack.Screen name="city" component={City} options={{
                 title: 'CITY',
@@ -77,9 +90,9 @@ welcome: {
     width: 150,
     textAlign: 'right'
 },
-welcomeImg: {
+/* welcomeImg: {
     alignSelf: 'right'
-}
+} */
 
 })
 

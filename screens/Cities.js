@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import {connect} from 'react-redux'
 import citiesActions from '../redux/actions/citiesActions'
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView, ImageBackground, Image } from 'react-native';
+import Loader2 from '../components/Loader2'
 
 const Cities = (props) => {
   
@@ -15,26 +16,17 @@ const Cities = (props) => {
         await props.getAllCities()
       } catch (error) {
         alert(error)
-      } /* finally {
+      } finally {
         setLoading(false)
-      } */
+      }
     }
     getAllCities()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
-/*   if (loading) {
-    return <div className="contenedor">
-              <div className='city' style={{backgroundImage: "url('/assets/hero.jpg')"}}>
-                      <div className='insideCities'> 
-                          <h3>Find your next adventure</h3>
-                      </div>
-              </div>
-              <h2 className="loading">Loading...</h2>
-           </div>       
+  if (loading) {
+    <Loader2 />;
   }
- */
    var filteredMap = props.filtered.map((city) => {
     return ( 
       <TouchableOpacity onPress={() => {
@@ -61,10 +53,11 @@ const Cities = (props) => {
       </View>
       <View style={styles.citiesCard}>
       {props.filtered.length > 0 ? filteredMap :  
-          <View >
+          <View style={styles.sorry}>
+            <Image source={require("../assets/sorry.png")} />
             <Text>We're sorry!</Text>
             <Text>We don't have that city yet...</Text>
-            <Text>Please try a different one</Text>
+            <Text>Please try a different one.</Text>
           </View>
         }
       </View>
@@ -125,6 +118,10 @@ const styles = StyleSheet.create({
   },
   citiesCard: {
     alignItems: 'center'
+  },
+  sorry: {
+    alignItems: 'center', 
+    padding: 10
   }
 });
 

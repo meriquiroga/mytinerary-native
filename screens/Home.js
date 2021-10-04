@@ -8,7 +8,7 @@ const Home = (props) => {
     <View style={styles.container}>
       <View style={styles.main}>
         <ImageBackground
-        source={{uri: 'https://beprint.com.ar/wp-content/uploads/2021/10/heronative.jpg'}}
+        source={{uri: 'https://beprint.com.ar/wp-content/uploads/2021/10/heronative2.jpg'}}
          style={styles.mainImg}
         >
           <View style={styles.insideHero}>
@@ -21,15 +21,15 @@ const Home = (props) => {
           <TouchableOpacity>
             <View style={styles.button}>
               <Text style={styles.buttonText} onPress={() => {
-                  props.navigation.navigate('cities')
+                  props.navigation.navigate('citiesDr')
               }}>START DREAMING</Text>
             </View>
           </TouchableOpacity>
-          <Text onPress={() => {
+{/*           <Text onPress={() => {
                   props.navigation.toggleDrawer()
               }} >
             MENU
-          </Text>
+          </Text> */}
         </ImageBackground>
         <View style={styles.carrousel}>
           <Text style={styles.carrouselText}>Popular MyTineraries</Text>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   mainText: {
     textAlign: "center",
-    padding: 20,
+    padding: 18,
   },
   footer: {
     width: "100%",
