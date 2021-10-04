@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   citiesText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 20,
   },
   formInput: {
     backgroundColor: 'white',

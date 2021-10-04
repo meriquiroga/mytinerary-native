@@ -215,12 +215,12 @@ const SignUp = (props) => {
     {"name": "Zambia", "code": "ZM"}, 
     {"name": "Zimbabwe", "code": "ZW"} 
     ]
-  const inputHandler = (e, target, value) => {
+  /* const inputHandler = (e) => {
     setUserInfo({
       ...userInfo,
-      [target]: e || value
+      [e.target.name]: e.target.value
     })
-  }
+  } */
 
   const formSubmit = async (e) => {
     e.preventDefault()
@@ -267,17 +267,26 @@ const SignUp = (props) => {
     }
   }
 
+  /* useEffect(() => {
+    axios
+      .get("https://restcountries.eu/rest/v2/all?fields=name")
+      .then((response) => setCountries(response.data))
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []); */
+
   return (
     <ScrollView>
     <View style={styles.container}>
       <Text style={styles.formTitle} >Create your account here</Text>
       <View style={styles.formContainer}>
-        <TextInput style={styles.formInput} placeholder="Name" onChangeText={(e) => inputHandler(e, 'name')}/>
-        <TextInput style={styles.formInput} placeholder="Surname" onChangeText={(e) => inputHandler(e, 'surname')}/>
-        <TextInput style={styles.formInput} placeholder="E-mail" onChangeText={(e) => inputHandler(e, 'email')}/>
-        <TextInput style={styles.formInput} secureTextEntry={true} placeholder="Password" onChangeText={(e) => inputHandler(e, 'password')}/>
-        <TextInput style={styles.formInput} placeholder="URL of your picture" onChangeText={(e) => inputHandler(e, 'img')}/>
-        <SelectPicker style={styles.formInput} placeholder="Select your country" default='Select your country' onValueChange={(e) => inputHandler(e, 'country')}>
+        <TextInput style={styles.formInput} placeholder="Name" onChange={(e) => setUserInfo({ ...userInfo, name: e.nativeEvent.text })}/>
+        <TextInput style={styles.formInput} placeholder="Surname" onChange={(e) => setUserInfo({ ...userInfo, surname: e.nativeEvent.text })}/>
+        <TextInput style={styles.formInput} placeholder="E-mail" onChange={(e) => setUserInfo({ ...userInfo, email: e.nativeEvent.text })}/>
+        <TextInput style={styles.formInput} secureTextEntry={true} placeholder="Password" onChange={(e) => setUserInfo({ ...userInfo, password: e.nativeEvent.text })}/>
+        <TextInput style={styles.formInput} placeholder="URL of your picture" onChange={(e) => setUserInfo({ ...userInfo, img: e.nativeEvent.text })}/>
+        <SelectPicker style={styles.formInput} placeholder="Select your country" default='Select your country' onChange={(e) => setUserInfo({ ...userInfo, country: e.nativeEvent.text })}>
         {countries.map((country) => (<SelectPicker.Item key={country.name} label={country.name} value={country.name} />))}
         </SelectPicker>
 

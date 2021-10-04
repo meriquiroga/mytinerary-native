@@ -11,8 +11,8 @@ import { LogBox } from 'react-native'
 const myStore = createStore(rootReducer, applyMiddleware(thunk))
 
 const App = () => {
-  /* LogBox.ignoreLogs(['Warning: ...']);
-  LogBox.ignoreAllLogs(); */
+  LogBox.ignoreLogs(['Warning: ...']);
+  LogBox.ignoreAllLogs();
   return (
     <Provider store={myStore}>
       <NavigationContainer>

@@ -19,9 +19,15 @@ import Activities from "../components/Activities";
 import Loader from "../components/Loader";
 
 const Itinerary = (props) => {
+  console.log(activities + "estoy viendo activities de itinerario");
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
+  const [quore, setQuore] = useState(false);
+  /* const onButtonToggle = (value) => {
+    setQuore(quore === false ? true : false);
+  }; */
   const [countLikes, setCountLikes] = useState(props.itinerary.likes);
+
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
@@ -49,6 +55,15 @@ const Itinerary = (props) => {
 
   const toggle = () => setVisible(!visible);
 
+  const likesByUserId = () => {
+    if (props.itinerary.likes.includes(props.userId)) {
+      setQuore(true);
+    } else {
+      setQuore(false);
+    }
+    likesByUserId();
+  };
+
   const likes = async () => {
     if (!props.token) {
       Alert.alert("You need to log in to like an itinerary");
@@ -73,10 +88,23 @@ const Itinerary = (props) => {
         <View style={styles.container}>
           <Text style={styles.title}>{props.itinerary.name}</Text>
           <View style={styles.likes}>
-          <Text>{countLikes.length}</Text>
-          <TouchableOpacity onPress={likes}>
-<Image source={require("../assets/likes.png")} />
-  </TouchableOpacity>
+            <TouchableOpacity onPress={likes}>
+              <View>
+                <Icon
+                  raised
+                  name={quore ? "heart" : "heart-o"}
+                  type="font-awesome"
+                  value={quore ? "user" : "smile"}
+                  quore={quore}
+                  color={quore ? "red" : "gray"}
+                />
+                <Text>{countLikes.length}</Text>
+              </View>
+            </TouchableOpacity>
+            {/* <Text>{countLikes.length}</Text>
+      <TouchableOpacity onPress={likes}>
+                <Image source={require("../assets/likes.png")} />
+      </TouchableOpacity> */}
           </View>
           <ImageBackground
             source={{ uri: props.itinerary.img }}
@@ -151,7 +179,7 @@ const styles = StyleSheet.create({
   },
   title: {
     backgroundColor: "#0b3f78",
-    fontSize: 18,
+    fontSize: 16,
     width: "100%",
     paddingVertical: 12,
     textAlign: "center",
@@ -202,7 +230,7 @@ const styles = StyleSheet.create({
   }, 
   titleActivities: {
     alignSelf: 'center',
-    fontSize: 18,
+    fontSize: 16,
     color: '#0b3f78'
   }
 

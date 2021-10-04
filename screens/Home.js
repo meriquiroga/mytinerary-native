@@ -11,11 +11,13 @@ const Home = (props) => {
         source={{uri: 'https://beprint.com.ar/wp-content/uploads/2021/10/heronative.jpg'}}
          style={styles.mainImg}
         >
+          <View style={styles.insideHero}>
           <Image source={require("../assets/mytineraryLogo.png")} />
           <Text style={styles.mainText}>
             Find your perfect trip, designed by insiders who know and love their
             cities!
           </Text>
+</View>
           <TouchableOpacity>
             <View style={styles.button}>
               <Text style={styles.buttonText} onPress={() => {
@@ -90,9 +92,13 @@ const styles = StyleSheet.create({
   },
   carrouselText: {
     color: "#0b3f78",
-    fontSize: 16,
+    fontSize: 18,
     paddingTop: 12,
   },
+  insideHero: {
+    alignItems: 'center',
+    alignSelf: 'center'
+  }
 });
 
 export default Home;

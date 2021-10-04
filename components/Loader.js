@@ -7,7 +7,6 @@ const Loader = () => {
         <SafeAreaView style={styles.mainContainer}>
             <View className="loaderBox">
                 <Text>Loading...</Text>
-                {/* <Image src={"/assets/search.gif"}/> */}
             </View>
         </SafeAreaView>
     )

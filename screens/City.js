@@ -157,21 +157,22 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     padding: 15,
-    fontSize: 18
+    fontSize: 20
   },
   citiesP: {
     backgroundColor: "#0b3f78",
     color: 'white',
     width: '100%',
     textAlign: 'center',
-    padding: 5
+    padding: 5,
+    fontSize: 16
   }, 
   itineraryContainer: {
     alignItems: "center",
   },
   find: {
     color: "#0b3f78",
-    fontSize: 16,
+    fontSize: 18,
     paddingVertical: 10,
   },
   cityCard: {

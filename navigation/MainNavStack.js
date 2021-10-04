@@ -5,7 +5,7 @@ import Cities from '../screens/Cities'
 import SignUp from '../screens/SignUp'
 import LogIn from '../screens/LogIn'
 import City from '../screens/City'
-import { StyleSheet, Image, SafeAreaView, } from "react-native";
+import { StyleSheet, Image, SafeAreaView, Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import {connect} from 'react-redux'
@@ -33,7 +33,7 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => <Image source={require("../assets/logo.png")} />
+                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />
             }}/>
             <Stack.Screen name="cities" component={Cities} options={{
                 title: 'CITIES',
@@ -41,24 +41,47 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
+                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />
+            }}/>
+            <Stack.Screen name="signup" component={SignUp} options={{
+                title: 'SIGN UP',
+                headerTintColor: 'white',
+                headerStyle: {
+                backgroundColor: '#0b3f78'
+                },
+                headerRight: () => {props.token ? <Text>Welcome, {props.name}</Text> : <Image source={require("../assets/logo.png")} />}
+            }}/>
+             <Stack.Screen name="login" component={LogIn} options={{
+                title: 'LOG IN',
+                headerTintColor: 'white',
+                headerStyle: {
+                backgroundColor: '#0b3f78'
+                },
                 headerRight: () => <Image source={require("../assets/logo.png")} />
             }}/>
-            <Stack.Screen name="signup" component={SignUp}/>
-             <Stack.Screen name="login" component={LogIn}/>
             <Stack.Screen name="city" component={City} options={{
                 title: 'CITY',
                 headerTintColor: 'white',
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => <Image source={require("../assets/logo.png")} />
+                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image source={require("../assets/logo.png")} />
             }} />
-            
-
-            
         </Stack.Navigator>
     )
 }
+
+const styles = StyleSheet.create({
+welcome: {
+    color: 'white',
+    width: 150,
+    textAlign: 'right'
+},
+welcomeImg: {
+    alignSelf: 'right'
+}
+
+})
 
 const mapStateToProps = (state) => {
     return {

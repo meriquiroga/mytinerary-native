@@ -5,7 +5,7 @@ import Cities from '../screens/Cities'
 import SignUp from '../screens/SignUp'
 import LogIn from '../screens/LogIn'
 import Logout from '../components/Logout'
-import { StyleSheet, Image, SafeAreaView, } from "react-native";
+import { StyleSheet, Image, SafeAreaView, Text} from "react-native";
 import MainNavStack from './MainNavStack'
 import { useEffect } from "react";
 import {connect} from 'react-redux'
@@ -46,7 +46,7 @@ const Navigator = (props) => {
                 headerStyle: {
                 backgroundColor: '#0b3f78'
                 },
-                headerRight: () => <Image source={require("../assets/logo.png")} />
+                headerRight: () => props.token ? <Text style={styles.welcome} >Welcome, {props.name}!</Text> : <Image style={styles.welcomeImg} source={require("../assets/logo.png")} />
             }}/>
             
             {!props.token && <Drawer.Screen name="signupDr" component={SignUp} options={{
@@ -80,6 +80,19 @@ const Navigator = (props) => {
         </Drawer.Navigator>
     )
 }
+
+const styles = StyleSheet.create({
+    welcome: {
+        color: 'white',
+        width: 150,
+        textAlign: 'right',
+        paddingRight: 20
+    },
+    welcomeImg: {
+        marginRight: 20
+    }
+    
+    })
 
 const mapStateToProps = (state) => {
     return {
